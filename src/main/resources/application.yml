@@ -1,0 +1,16 @@
+
+server:
+  port: 8080
+
+spring:
+  main:
+    log-startup-info: false
+    banner-mode: 'off'
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: webupdate
+    rest:
+      max-page-size: 10000
