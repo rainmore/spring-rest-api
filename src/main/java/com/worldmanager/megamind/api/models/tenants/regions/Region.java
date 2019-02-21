@@ -1,5 +1,6 @@
-package com.example.demo.domain;
+package com.worldmanager.megamind.api.models.tenants.regions;
 
+import com.worldmanager.megamind.api.models.Entity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;

@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.worldmanager.megamind.api.models;
 
 import java.io.Serializable;
 
