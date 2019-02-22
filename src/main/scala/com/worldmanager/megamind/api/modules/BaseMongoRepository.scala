@@ -1,4 +1,4 @@
-package com.worldmanager.megamind.api.repositories
+package com.worldmanager.megamind.api.modules
 
 import java.io.Serializable
 

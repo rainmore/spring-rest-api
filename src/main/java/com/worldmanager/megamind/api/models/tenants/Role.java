@@ -1,4 +1,4 @@
-package com.worldmanager.megamind.api.models.tenants.servers;
+package com.worldmanager.megamind.api.models.tenants;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -46,5 +46,17 @@ public enum Role implements EntityEnum<String> {
         public static final String DATABASE_VALUE    = "database";
         public static final String CHANCELLOR_VALUE  = "chancellor";
         public static final String STEWARD_VALUE     = "steward";
+    }
+
+    public Boolean hasZone() {
+        return this.equals(APPLICATION) || this.equals(STEWARD);
+    }
+
+    public Boolean hasCluster() {
+        return this.equals(APPLICATION) || this.equals(STEWARD) || this.equals(DATABASE);
+    }
+
+    public Boolean hasRegion() {
+        return this.equals(CHANCELLOR);
     }
 }

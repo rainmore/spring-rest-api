@@ -1,39 +1,28 @@
-package com.worldmanager.megamind.api.models.tenants.clusters;
+package com.worldmanager.megamind.api.models.tenants;
 
 import com.worldmanager.megamind.api.models.Entity;
-import com.worldmanager.megamind.api.models.tenants.regions.Region;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.Instant;
 
+@Document(collection = Region.COLLECTION_NAME)
+@TypeAlias(value = Region.COLLECTION_NAME)
+public class Region implements Entity {
 
-@Document(collection = Cluster.COLLECTION_NAME)
-@TypeAlias(value = Cluster.COLLECTION_NAME)
-public class Cluster implements Entity {
+    public static final String COLLECTION_NAME = "regions";
+    public static final String API_PATH = "tenants.regions";
+    public static final String API_COLLECTION_REF = "tenants.regions";
 
-    public static final String COLLECTION_NAME = "clusters";
 
-    @DBRef
-    private Region  region;
     private String  id;
     private String  name;
+    private String  displayName;
     private Instant createdAt;
     private Instant updatedAt;
-
-    @Field("region")
-    public Region getRegion() {
-        return region;
-    }
-
-    public void setRegion(final Region region) {
-        this.region = region;
-    }
 
     @Id
     public String getId() {
@@ -50,6 +39,14 @@ public class Cluster implements Entity {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     @CreatedDate

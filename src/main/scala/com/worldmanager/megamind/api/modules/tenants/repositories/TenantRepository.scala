@@ -1,11 +1,11 @@
-package com.worldmanager.megamind.api.repositories.tenants
+package com.worldmanager.megamind.api.modules.tenants.repositories
 
-import com.worldmanager.megamind.api.models.tenants.tenants.Tenant
-import com.worldmanager.megamind.api.repositories.BaseMongoRepository
+import com.worldmanager.megamind.api.models.tenants.Tenant
+import com.worldmanager.megamind.api.modules.BaseMongoRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.data.rest.core.annotation.{RepositoryRestResource, RestResource}
 
-@RepositoryRestResource(collectionResourceRel = "tenants", path = "tenants")
+@RepositoryRestResource(path = Tenant.API_PATH, collectionResourceRel = Tenant.API_COLLECTION_REF)
 trait TenantRepository extends BaseMongoRepository[Tenant, String] {
 
     @RestResource

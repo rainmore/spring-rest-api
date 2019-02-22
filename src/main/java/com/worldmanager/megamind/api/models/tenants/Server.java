@@ -1,12 +1,11 @@
-package com.worldmanager.megamind.api.models.tenants.servers;
+package com.worldmanager.megamind.api.models.tenants;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.worldmanager.megamind.api.models.Entity;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.DiscriminatorColumn;
@@ -14,25 +13,30 @@ import java.time.Instant;
 
 @Document(collection = Server.COLLECTION_NAME)
 @DiscriminatorColumn(name = Server.ROLE_FIELD)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = Server.ROLE_FIELD, visible = true)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Chancellor.class),
-        @JsonSubTypes.Type(value = Database.class),
-        @JsonSubTypes.Type(value = Application.class),
-        @JsonSubTypes.Type(value = Steward.class)
-})
 public abstract class Server implements Entity {
 
     public static final String COLLECTION_NAME = "servers";
     public static final String ROLE_FIELD      = "role";
 
-    private String   id;
-    private String   name;
-    private String   host;
-    private Role     role;
-    private Boolean  active = false;
-    private Instant  createdAt;
+    public static final String API_PATH = "tenants.servers";
+    public static final String API_COLLECTION_REF = "tenants.servers";
+
+    private String  id;
+    private String  name;
+    private String  host;
+    private Role    role;
+    private Boolean active = false;
+    private Instant createdAt;
     private Instant updatedAt;
+
+    private Zone    zone;
+
+    @DBRef
+    private Region  region;
+
+    @DBRef
+    private Cluster cluster;
+
 
     @Id
     public String getId() {
@@ -93,4 +97,30 @@ public abstract class Server implements Entity {
     public void setUpdatedAt(final Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(final Zone zone) {
+        this.zone = zone;
+    }
+
+    public Cluster getCluster() {
+        return cluster;
+    }
+
+    public void setCluster(final Cluster cluster) {
+        this.cluster = cluster;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(final Region region) {
+        this.region = region;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.worldmanager.megamind.api.models.tenants.tenants;
+package com.worldmanager.megamind.api.models.tenants;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

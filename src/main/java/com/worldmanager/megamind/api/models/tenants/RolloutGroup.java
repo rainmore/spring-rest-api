@@ -1,4 +1,4 @@
-package com.worldmanager.megamind.api.models.tenants.tenants;
+package com.worldmanager.megamind.api.models.tenants;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;

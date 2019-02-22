@@ -1,9 +1,8 @@
-package com.worldmanager.megamind.api.models.tenants.tenants;
+package com.worldmanager.megamind.api.models.tenants;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.worldmanager.megamind.api.models.Entity;
-import com.worldmanager.megamind.api.models.tenants.clusters.Cluster;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.TypeAlias;
@@ -20,6 +19,9 @@ import java.time.Instant;
 public class Tenant implements Entity {
 
     public static final String COLLECTION_NAME = "tenants";
+    public static final String API_PATH = "tenants.tenants";
+    public static final String API_COLLECTION_REF = "tenants.tenants";
+
 
     @DBRef
     private Cluster      cluster;
