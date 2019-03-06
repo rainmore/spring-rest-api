@@ -10,15 +10,25 @@ import com.worldmanager.megamind.api.models.EntityEnum;
  * @see <a href="https://worldmanager.jira.com/wiki/x/TgBYAg">Cloud Atlas</a>
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum Role implements EntityEnum<String> {
+public enum ServerRole implements EntityEnum<String> {
     APPLICATION(Constants.APPLICATION_VALUE),
     DATABASE(Constants.DATABASE_VALUE),
     CHANCELLOR(Constants.CHANCELLOR_VALUE),
     STEWARD(Constants.STEWARD_VALUE);
 
+    public static class Constants {
+        public static final String APPLICATION_VALUE = "application";
+        public static final String DATABASE_VALUE    = "database";
+        public static final String CHANCELLOR_VALUE  = "chancellor";
+        public static final String STEWARD_VALUE     = "steward";
+    }
+
+    public static final String API_PATH = "tenants.server.roles";
+    public static final String API_COLLECTION_REF = "tenants.server.roles";
+
     private final String name;
 
-    Role(final String name) {
+    ServerRole(final String name) {
         this.name = name;
     }
 
@@ -27,25 +37,13 @@ public enum Role implements EntityEnum<String> {
         return name;
     }
 
-    public static Role forValue(final String value) {
-        for (final Role role : Role.values()) {
-            if (role.value().equals(value)) {
-                return role;
-            }
-        }
-
-        throw new IllegalArgumentException("Role not found: " + value);
+    public static ServerRole forValue(final String value) {
+        return EntityEnum.forValue(ServerRole.class, type -> type.value().equals(value))
+                .orElseThrow(() -> new IllegalArgumentException("No role found by an input value: " + value));
     }
 
     public String value() {
         return name;
-    }
-
-    public static class Constants {
-        public static final String APPLICATION_VALUE = "application";
-        public static final String DATABASE_VALUE    = "database";
-        public static final String CHANCELLOR_VALUE  = "chancellor";
-        public static final String STEWARD_VALUE     = "steward";
     }
 
     public Boolean hasZone() {

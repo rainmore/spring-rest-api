@@ -9,8 +9,16 @@ import com.worldmanager.megamind.api.models.EntityEnum;
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Zone implements EntityEnum<String> {
-    A("A"),
-    B("B");
+    A(Constants.A_VALUE),
+    B(Constants.B_VALUE);
+
+    public static class Constants {
+        public static final String A_VALUE  = "A";
+        public static final String B_VALUE  = "B";
+    }
+
+    public static final String API_PATH = "tenants.zones";
+    public static final String API_COLLECTION_REF = "tenants.zones";
 
     private final String name;
 
@@ -24,13 +32,8 @@ public enum Zone implements EntityEnum<String> {
     }
 
     public static Zone forValue(final String value) {
-        for (final Zone zone : Zone.values()) {
-            if (zone.value().equals(value)) {
-                return zone;
-            }
-        }
-
-        throw new IllegalArgumentException("Zone not found: " + value);
+        return EntityEnum.forValue(Zone.class, type -> type.value().equals(value))
+                .orElseThrow(() -> new IllegalArgumentException("No zone found by an input value: " + value));
     }
 
     public String value() {

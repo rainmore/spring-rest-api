@@ -1,6 +1,6 @@
 package com.worldmanager.megamind.api.modules.tenants.controllers
 
-import com.worldmanager.megamind.api.models.tenants.{Rto, Tenant}
+import com.worldmanager.megamind.api.models.tenants._
 import com.worldmanager.megamind.api.modules.helpers.PageableList
 import org.springframework.data.rest.webmvc.RepositoryRestController
 import org.springframework.hateoas.{PagedResources, Resource, Resources}
@@ -19,10 +19,30 @@ object TenantsController {
 class TenantsController {
 
     @GetMapping(Array("/" + Rto.API_PATH))
-    def getRtos(): ResponseEntity[Resources[Rto]] = {
-        val rtoes = Rto.values().map(new Resource[Rto](_)).toSeq
-        val resources = new Resources[Rto](Rto.values().toSeq.asJava)
+    def getRtos(): ResponseEntity[Resource[Rto]] = {
+        val resources = new Resource[Rto](Rto.values().map(value => value -> value).toMap.asJava)
         resources.add(linkTo(methodOn(this.getClass).getRtos()).withSelfRel())
+        ResponseEntity.ok(resources)
+    }
+
+    @GetMapping(Array("/" + RolloutGroup.API_PATH))
+    def getRolloutGroups(): ResponseEntity[Resource[RolloutGroup]] = {
+        val resources = new Resource[RolloutGroup](RolloutGroup.values().map(value => value -> value).toMap.asJava)
+        resources.add(linkTo(methodOn(this.getClass).getRolloutGroups()).withSelfRel())
+        ResponseEntity.ok(resources)
+    }
+
+    @GetMapping(Array("/" + ServerRole.API_PATH))
+    def getServerRoles(): ResponseEntity[Resources[ServerRole]] = {
+        val resources = new Resource[ServerRole](ServerRole.values().map(value => value -> value).toMap.asJava)
+        resources.add(linkTo(methodOn(this.getClass).getServerRoles()).withSelfRel())
+        ResponseEntity.ok(resources)
+    }
+
+    @GetMapping(Array("/" + Zone.API_PATH))
+    def getZones(): ResponseEntity[Resources[Zone]] = {
+        val resources = new Resources[Zone](Zone.values().map(value => value -> value).toMap.asJava)
+        resources.add(linkTo(methodOn(this.getClass).getZones()).withSelfRel())
         ResponseEntity.ok(resources)
     }
 }

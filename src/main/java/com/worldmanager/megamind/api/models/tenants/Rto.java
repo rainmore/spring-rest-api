@@ -9,13 +9,23 @@ import com.worldmanager.megamind.api.models.EntityEnum;
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Rto implements EntityEnum<String> {
-    FRANKLYN_SCHOLAR("FS"),
-    AVANA("AVANA"),
-    ARROW("ARROW"),
-    WLC("WLC"),
-    ETS("ETS"),
-    ARA("ARA"),
-    FIRST_IMPRESSIONS("FIRST_IMPRESSIONS");
+    FRANKLYN_SCHOLAR(Constants.FRANKLYN_SCHOLAR_VALUE),
+    AVANA(Constants.AVANA_VALUE),
+    ARROW(Constants.ARROW_VALUE),
+    WLC(Constants.WLC_VALUE),
+    ETS(Constants.ETS_VALUE),
+    ARA(Constants.ARA_VALUE),
+    FIRST_IMPRESSIONS(Constants.FIRST_IMPRESSIONS_VALUE);
+
+    public static class Constants {
+        public static final String FRANKLYN_SCHOLAR_VALUE  = "FS";
+        public static final String AVANA_VALUE             = "AVANA";
+        public static final String ARROW_VALUE             = "ARROW";
+        public static final String WLC_VALUE               = "WLC";
+        public static final String ETS_VALUE               = "ETS";
+        public static final String ARA_VALUE               = "ARA";
+        public static final String FIRST_IMPRESSIONS_VALUE = "FIRST_IMPRESSIONS";
+    }
 
     public static final String API_PATH = "tenants.rtoes";
     public static final String API_COLLECTION_REF = "tenants.rtoes";
@@ -32,13 +42,8 @@ public enum Rto implements EntityEnum<String> {
     }
 
     public static Rto forValue(final String value) {
-        for (final Rto rto : Rto.values()) {
-            if (rto.value().equals(value)) {
-                return rto;
-            }
-        }
-
-        throw new IllegalArgumentException("Rto not found: " + value);
+        return EntityEnum.forValue(Rto.class, type -> type.value().equals(value))
+                .orElseThrow(() -> new IllegalArgumentException("No RTO found by an input value: " + value));
     }
 
     public String value() {

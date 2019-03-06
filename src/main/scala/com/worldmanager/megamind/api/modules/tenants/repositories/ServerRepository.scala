@@ -1,6 +1,6 @@
 package com.worldmanager.megamind.api.modules.tenants.repositories
 
-import com.worldmanager.megamind.api.models.tenants.{Role, Server}
+import com.worldmanager.megamind.api.models.tenants.{ServerRole, Server}
 import com.worldmanager.megamind.api.modules.BaseMongoRepository
 import org.springframework.data.domain.{Page, Pageable}
 import org.springframework.data.repository.query.Param
@@ -13,5 +13,5 @@ trait ServerRepository[T <: Server] extends BaseMongoRepository[T, String] {
     def findByName(@Param("name") name: String): T
 
     @RestResource
-    def findByRole(@Param("role") role: Role, pageable: Pageable): Page[T]
+    def findByRole(@Param("role") role: ServerRole, pageable: Pageable): Page[T]
 }

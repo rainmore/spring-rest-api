@@ -21,13 +21,13 @@ public abstract class Server implements Entity {
     public static final String API_PATH = "tenants.servers";
     public static final String API_COLLECTION_REF = "tenants.servers";
 
-    private String  id;
-    private String  name;
-    private String  host;
-    private Role    role;
-    private Boolean active = false;
-    private Instant createdAt;
-    private Instant updatedAt;
+    private String     id;
+    private String     name;
+    private String     host;
+    private ServerRole role;
+    private Boolean    active = false;
+    private Instant    createdAt;
+    private Instant    updatedAt;
 
     private Zone    zone;
 
@@ -64,11 +64,11 @@ public abstract class Server implements Entity {
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    public Role getRole() {
+    public ServerRole getRole() {
         return role;
     }
 
-    public void setRole(final Role role) {
+    public void setRole(final ServerRole role) {
         this.role = role;
     }
 
