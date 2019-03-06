@@ -19,7 +19,7 @@ import java.time.Instant;
 public class Tenant implements Entity {
 
     public static final String COLLECTION_NAME = "tenants";
-    public static final String API_PATH = "tenants.tenants";
+    public static final String API_PATH           = "tenants.tenants";
     public static final String API_COLLECTION_REF = "tenants.tenants";
 
 

@@ -17,6 +17,9 @@ public enum Rto implements EntityEnum<String> {
     ARA("ARA"),
     FIRST_IMPRESSIONS("FIRST_IMPRESSIONS");
 
+    public static final String API_PATH = "tenants.rtoes";
+    public static final String API_COLLECTION_REF = "tenants.rtoes";
+
     private final String name;
 
     Rto(final String name) {
