@@ -19,29 +19,29 @@ object TenantsController {
 class TenantsController {
 
     @GetMapping(Array("/" + Rto.API_PATH))
-    def getRtos(): ResponseEntity[Resource[Rto]] = {
-        val resources = new Resource[Rto](Rto.values().map(value => value -> value).toMap.asJava)
+    def getRtos(): ResponseEntity[Resources[Rto]] = {
+        val resources = new Resources[Rto](Rto.values().toSeq.asJava)
         resources.add(linkTo(methodOn(this.getClass).getRtos()).withSelfRel())
         ResponseEntity.ok(resources)
     }
 
     @GetMapping(Array("/" + RolloutGroup.API_PATH))
-    def getRolloutGroups(): ResponseEntity[Resource[RolloutGroup]] = {
-        val resources = new Resource[RolloutGroup](RolloutGroup.values().map(value => value -> value).toMap.asJava)
+    def getRolloutGroups(): ResponseEntity[Resources[RolloutGroup]] = {
+        val resources = new Resources[RolloutGroup](RolloutGroup.values().toSeq.asJava)
         resources.add(linkTo(methodOn(this.getClass).getRolloutGroups()).withSelfRel())
         ResponseEntity.ok(resources)
     }
 
     @GetMapping(Array("/" + ServerRole.API_PATH))
     def getServerRoles(): ResponseEntity[Resources[ServerRole]] = {
-        val resources = new Resource[ServerRole](ServerRole.values().map(value => value -> value).toMap.asJava)
+        val resources = new Resources[ServerRole](ServerRole.values().toSeq.asJava)
         resources.add(linkTo(methodOn(this.getClass).getServerRoles()).withSelfRel())
         ResponseEntity.ok(resources)
     }
 
     @GetMapping(Array("/" + Zone.API_PATH))
     def getZones(): ResponseEntity[Resources[Zone]] = {
-        val resources = new Resources[Zone](Zone.values().map(value => value -> value).toMap.asJava)
+        val resources = new Resources[Zone](Zone.values().toSeq.asJava)
         resources.add(linkTo(methodOn(this.getClass).getZones()).withSelfRel())
         ResponseEntity.ok(resources)
     }
